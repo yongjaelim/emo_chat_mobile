@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.intern_project">
+    package="fasoo.com.emo_chat_mobile">
    <application
-        android:label="intern_project"
+        android:label="emo_chat_mobile"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
