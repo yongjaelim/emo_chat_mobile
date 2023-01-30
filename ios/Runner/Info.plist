@@ -49,5 +49,11 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<!-- Permission options for the `photos` group -->
+        <key>NSPhotoLibraryUsageDescription</key>
+        <string>이모티콘 추가 기능을 이용하기 위해 사진 라이브러리 접근 권한이 필요합니다.</string>
+        <!-- Permission options for the `camera` group -->
+        <key>NSCameraUsageDescription</key>
+        <string>이모티콘 추가 기능을 이용하기 위해 카메라 접근 권한이 필요합니다.</string>
 	</dict>
 </plist>
