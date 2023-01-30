@@ -1,6 +1,9 @@
+import 'package:emo_chat_mobile/main.dart';
+import 'package:emo_chat_mobile/ui/login/login_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -33,64 +36,76 @@ class _LoginViewState extends State<LoginView> {
       },
       child: Scaffold(
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(40),
-                child: Image.asset('assets/images/emo_chat.png'),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 40,
-                    right: 40,
-                    bottom: 20
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(40),
+                  child: Image.asset('assets/images/emo_chat.png'),
                 ),
-                child: TextField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'ID를 입력해주세요.',
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 40,
+                      right: 40,
+                      bottom: 20
                   ),
-                  controller: id,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 40,
-                    right: 40,
-                    bottom: 50
-                ),
-                child: TextField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: '패스워드를 입력해주세요.',
-                  ),
-                  controller: pwd,
-                  obscureText: true,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 40,
-                    right: 40
-                ),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'ID를 입력해주세요.',
+                    ),
+                    controller: id,
+                    onChanged: (text){
+                      setState(() {});
                     },
-                    child: const Text('로그인'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepOrange
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 40,
+                      right: 40,
+                      bottom: 50
+                  ),
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: '패스워드를 입력해주세요.',
+                    ),
+                    controller: pwd,
+                    onChanged: (text){
+                      setState(() {});
+                    },
+                    obscureText: true,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 40,
+                      right: 40
+                  ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: id.text.isNotEmpty && pwd.text.isNotEmpty ? () {
+                        id.clear();
+                        pwd.clear();
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => const MyHomePage(
+                              title: 'Login Test',
+                            )
+                        ));
+                        FocusScope.of(context).unfocus();
+                      } : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepOrange
+                      ),
+                      child: const Text('로그인'),
                     ),
                   ),
-                ),
-              )
-            ],
-
+                )
+              ],
+            )
           )
-        )
       ),
     );
   }
