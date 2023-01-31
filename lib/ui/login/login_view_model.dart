@@ -25,11 +25,8 @@ class LoginViewModel with ChangeNotifier {
     _buttonEnabled = id.isNotEmpty && password.isNotEmpty;
   }
 
-  void controlLoginButton() {
+  void makeFieldsEmpty() {
     setId('');
-    print(id);
     setPassword('');
-    print(password);
-    _updateButtonEnabled();
   }
 }

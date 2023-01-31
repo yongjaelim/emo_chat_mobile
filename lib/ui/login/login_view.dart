@@ -1,4 +1,5 @@
 import 'package:emo_chat_mobile/main.dart';
+import 'package:emo_chat_mobile/ui/chatting_list/chatting_list_view.dart';
 import 'package:emo_chat_mobile/ui/login/login_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -14,6 +15,10 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
 
+  final _key = GlobalKey<FormState>(); // for the future update for login feature
+  TextEditingController idArea = TextEditingController();
+  TextEditingController pwdArea = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -26,9 +31,6 @@ class _LoginViewState extends State<LoginView> {
 
     FlutterNativeSplash.remove();
   }
-
-  TextEditingController idArea = TextEditingController();
-  TextEditingController pwdArea = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,84 +47,97 @@ class _LoginViewState extends State<LoginView> {
                   padding: const EdgeInsets.all(40),
                   child: Image.asset('assets/images/emo_chat.png'),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 40,
-                      right: 40,
-                      bottom: 20
-                  ),
-                  child: Consumer<LoginViewModel>(
-                    builder: (context, loginViewModel, child) {
-                      return TextField(
-                        controller: idArea,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'ID를 입력해주세요.',
-                        ),
-                        onChanged: (text){
-                          loginViewModel.setId(text);
-                        },
-                      );
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 40,
-                      right: 40,
-                      bottom: 50
-                  ),
-                  child: Consumer<LoginViewModel>(
-                    builder: (context, loginViewModel, child) {
-                      return TextField(
-                        controller: pwdArea,
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: '패스워드를 입력해주세요.',
-                        ),
-                        onChanged: (text){
-                          loginViewModel.setPassword(text);
-                        },
-                      );
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 40,
-                      right: 40
-                  ),
-                  child: Consumer<LoginViewModel>(
-                    builder: (context, loginViewModel, child) {
-                      return SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: loginViewModel.getButtonEnabled ? () {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => const MyHomePage(
-                                  title: 'Login Test',
-                                )
-                            ));
-                            FocusScope.of(context).unfocus();
-                            idArea.clear();
-                            pwdArea.clear();
-                            loginViewModel.controlLoginButton();
-                          } : null,
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.deepOrange
-                          ),
-                          child: const Text('로그인'),
-                        ),
-                      );
-                    },
-                  ),
-                )
+                loginForm()
               ],
             )
           )
       ),
     );
   }
+
+  Widget loginForm() {
+    return Form(
+      key: _key,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 40,
+                  right: 40,
+                  bottom: 20
+              ),
+              child: Consumer<LoginViewModel>(
+                builder: (context, loginViewModel, child) {
+                  return TextFormField(
+                    controller: idArea,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'ID를 입력해주세요.',
+                    ),
+                    onChanged: (text){
+                      loginViewModel.setId(text);
+                    },
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 40,
+                  right: 40,
+                  bottom: 50
+              ),
+              child: Consumer<LoginViewModel>(
+                builder: (context, loginViewModel, child) {
+                  return TextFormField(
+                    controller: pwdArea,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: '패스워드를 입력해주세요.',
+                    ),
+                    onChanged: (text){
+                      loginViewModel.setPassword(text);
+                    },
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 40,
+                right: 40
+              ),
+              child: Consumer<LoginViewModel>(
+                builder: (context, loginViewModel, child) {
+                  return SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: loginViewModel.getButtonEnabled ? () {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => const ChattingListView()
+                        ));
+                        FocusScope.of(context).unfocus();
+                        idArea.clear();
+                        pwdArea.clear();
+                        loginViewModel.makeFieldsEmpty();
+                      } : null,
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepOrange
+                      ),
+                      child: const Text('로그인'),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
 }
 
