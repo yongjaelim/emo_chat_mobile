@@ -15,13 +15,24 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return ChangeNotifierProvider(
       create: (_) => LoginViewModel(),
       child: MaterialApp(
         title: 'Flutter Demo',
+        darkTheme: ThemeData.dark(),
+        theme: ThemeData(
+          primaryColor: Colors.white,
+          appBarTheme: const AppBarTheme(
+            shadowColor: Colors.black,
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black
+          ),
+        ),
         home: LoginView()
       ),
     );

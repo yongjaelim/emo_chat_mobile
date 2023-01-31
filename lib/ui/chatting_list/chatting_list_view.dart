@@ -18,6 +18,8 @@ class _ChattingListViewState extends State<ChattingListView> {
       'assets/images/2.png',
       'assets/images/3.png'
     ];
+    final bool lightMode = Theme.of(context).brightness == Brightness.light;
+    final Color textColor = lightMode ? Colors.black : Colors.white;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -25,12 +27,11 @@ class _ChattingListViewState extends State<ChattingListView> {
         title: const Text(
           'Chatting',
           style: TextStyle(
-            color: Colors.black,
             fontWeight: FontWeight.bold,
             fontSize: 30
           ),
         ),
-        backgroundColor: Colors.white,
+        //backgroundColor: lightMode ? Colors.white : Colors.black12,
         actions: [
           IconButton(
             onPressed: () {
@@ -59,7 +60,7 @@ class _ChattingListViewState extends State<ChattingListView> {
               );
             },
             icon: const Icon(Icons.logout),
-            color: Colors.black,
+            //color: textColor,
           ),
         ],
       ),
@@ -91,7 +92,7 @@ class _ChattingListViewState extends State<ChattingListView> {
                           style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w100,
-                              color: Colors.black),
+                              ),
                         ),
                         const SizedBox(
                           height: 40,

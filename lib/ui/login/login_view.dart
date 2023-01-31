@@ -101,6 +101,10 @@ class _LoginViewState extends State<LoginView> {
                     onChanged: (text){
                       loginViewModel.setPassword(text);
                     },
+                    onFieldSubmitted: loginViewModel.getButtonEnabled ? (value) {
+                      submit();
+                      loginViewModel.makeFieldsEmpty();
+                    } : null,
                   );
                 },
               ),
@@ -116,12 +120,7 @@ class _LoginViewState extends State<LoginView> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: loginViewModel.getButtonEnabled ? () {
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => const ChattingListView()
-                        ));
-                        FocusScope.of(context).unfocus();
-                        idArea.clear();
-                        pwdArea.clear();
+                        submit();
                         loginViewModel.makeFieldsEmpty();
                       } : null,
                       style: ElevatedButton.styleFrom(
@@ -137,6 +136,15 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
     );
+  }
+
+  void submit() {
+    Navigator.push(context, MaterialPageRoute(
+        builder: (context) => const ChattingListView()
+    ));
+    FocusScope.of(context).unfocus();
+    idArea.clear();
+    pwdArea.clear();
   }
 
 }
