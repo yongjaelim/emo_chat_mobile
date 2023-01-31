@@ -1,13 +1,14 @@
 import 'package:emo_chat_mobile/ui/login/login_view.dart';
 import 'package:emo_chat_mobile/ui/login/login_view_model.dart';
+import 'package:emo_chat_mobile/ui/splash.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+// import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   runApp(const MyApp());
 }
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
             foregroundColor: Colors.black
           ),
         ),
-        home: LoginView()
+        home: const SplashScreen()
       ),
     );
   }

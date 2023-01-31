@@ -18,6 +18,16 @@ class _ChattingListViewState extends State<ChattingListView> {
       'assets/images/2.png',
       'assets/images/3.png'
     ];
+    var messageSentTimeList = [
+      '오후 4:30',
+      '어제',
+      '2022/12/31'
+    ];
+    var messageList = [
+      '안녕하세요!',
+      '안녕',
+      '새해 복 많이 받으세요'
+    ];
     final bool lightMode = Theme.of(context).brightness == Brightness.light;
     final Color textColor = lightMode ? Colors.black : Colors.white;
     return Scaffold(
@@ -76,31 +86,68 @@ class _ChattingListViewState extends State<ChattingListView> {
                           const MyHomePage(title: "Chatting Test View")));
             },
             child: Card(
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 100,
-                    height: 100,
-                    child: Image.asset(userProfilePics[index]),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Column(
-                      children: [
-                        Text(
-                          userList[index],
-                          style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w100,
-                              ),
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: Image.asset(userProfilePics[index]),
                         ),
-                        const SizedBox(
-                          height: 40,
-                        )
-                      ],
+                      ),
                     ),
-                  )
-                ],
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          //mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              userList[index],
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              messageList[index],
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w100
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Column(
+                          children: [
+                            Text(
+                              messageSentTimeList[index],
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w100,
+                              ),
+                              textAlign: TextAlign.end,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
