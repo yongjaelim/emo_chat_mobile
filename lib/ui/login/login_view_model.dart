@@ -26,11 +26,10 @@ class LoginViewModel with ChangeNotifier {
   }
 
   void controlLoginButton() {
-    if (_buttonEnabled) {
-      id = '';
-      password = '';
-      _updateButtonEnabled();
-      notifyListeners();
-    }
+    setId('');
+    print(id);
+    setPassword('');
+    print(password);
+    _updateButtonEnabled();
   }
 }

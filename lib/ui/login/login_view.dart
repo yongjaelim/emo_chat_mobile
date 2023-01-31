@@ -13,8 +13,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  TextEditingController id = TextEditingController();
-  TextEditingController pwd = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -27,6 +26,9 @@ class _LoginViewState extends State<LoginView> {
 
     FlutterNativeSplash.remove();
   }
+
+  TextEditingController idArea = TextEditingController();
+  TextEditingController pwdArea = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +51,18 @@ class _LoginViewState extends State<LoginView> {
                       right: 40,
                       bottom: 20
                   ),
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'ID를 입력해주세요.',
-                    ),
-                    controller: id,
-                    onChanged: (text){
-                      setState(() {});
+                  child: Consumer<LoginViewModel>(
+                    builder: (context, loginViewModel, child) {
+                      return TextField(
+                        controller: idArea,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'ID를 입력해주세요.',
+                        ),
+                        onChanged: (text){
+                          loginViewModel.setId(text);
+                        },
+                      );
                     },
                   ),
                 ),
@@ -66,16 +72,20 @@ class _LoginViewState extends State<LoginView> {
                       right: 40,
                       bottom: 50
                   ),
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: '패스워드를 입력해주세요.',
-                    ),
-                    controller: pwd,
-                    onChanged: (text){
-                      setState(() {});
+                  child: Consumer<LoginViewModel>(
+                    builder: (context, loginViewModel, child) {
+                      return TextField(
+                        controller: pwdArea,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: '패스워드를 입력해주세요.',
+                        ),
+                        onChanged: (text){
+                          loginViewModel.setPassword(text);
+                        },
+                      );
                     },
-                    obscureText: true,
                   ),
                 ),
                 Padding(
@@ -83,24 +93,29 @@ class _LoginViewState extends State<LoginView> {
                       left: 40,
                       right: 40
                   ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: id.text.isNotEmpty && pwd.text.isNotEmpty ? () {
-                        id.clear();
-                        pwd.clear();
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => const MyHomePage(
-                              title: 'Login Test',
-                            )
-                        ));
-                        FocusScope.of(context).unfocus();
-                      } : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepOrange
-                      ),
-                      child: const Text('로그인'),
-                    ),
+                  child: Consumer<LoginViewModel>(
+                    builder: (context, loginViewModel, child) {
+                      return SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: loginViewModel.getButtonEnabled ? () {
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (context) => const MyHomePage(
+                                  title: 'Login Test',
+                                )
+                            ));
+                            FocusScope.of(context).unfocus();
+                            idArea.clear();
+                            pwdArea.clear();
+                            loginViewModel.controlLoginButton();
+                          } : null,
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.deepOrange
+                          ),
+                          child: const Text('로그인'),
+                        ),
+                      );
+                    },
                   ),
                 )
               ],
