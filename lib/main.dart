@@ -1,7 +1,9 @@
+import 'package:emo_chat_mobile/ui/emoji/emoji_view_model.dart';
 import 'package:emo_chat_mobile/ui/login/login_view.dart';
 import 'package:emo_chat_mobile/ui/login/login_view_model.dart';
 import 'package:emo_chat_mobile/ui/splash.dart';
 import 'package:flutter/material.dart';
+
 // import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
@@ -16,26 +18,29 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
-    return ChangeNotifierProvider(
-      create: (_) => LoginViewModel(),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        darkTheme: ThemeData.dark(),
-        theme: ThemeData(
-          primaryColor: Colors.white,
-          appBarTheme: const AppBarTheme(
-            shadowColor: Colors.black,
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black
-          ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => LoginViewModel(),
         ),
-        home: const SplashScreen()
-      ),
+        ChangeNotifierProvider(
+          create: (_) => EmojiViewModel(),
+        ),
+      ],
+      child: MaterialApp(
+          title: 'Flutter Demo',
+          darkTheme: ThemeData.dark(),
+          theme: ThemeData(
+            primaryColor: Colors.white,
+            appBarTheme: const AppBarTheme(
+                shadowColor: Colors.black,
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black),
+          ),
+          home: const SplashScreen()),
     );
   }
 }

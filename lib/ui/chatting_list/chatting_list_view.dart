@@ -1,4 +1,5 @@
 import 'package:emo_chat_mobile/main.dart';
+import 'package:emo_chat_mobile/ui/emoji/emoji_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -83,7 +84,7 @@ class _ChattingListViewState extends State<ChattingListView> {
                   context,
                   CupertinoPageRoute(
                       builder: (context) =>
-                          const MyHomePage(title: "Chatting Test View")));
+                          const EmojiView()));
             },
             child: Card(
               child: Container(

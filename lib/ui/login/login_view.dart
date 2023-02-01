@@ -1,9 +1,6 @@
-import 'package:emo_chat_mobile/main.dart';
 import 'package:emo_chat_mobile/ui/chatting_list/chatting_list_view.dart';
 import 'package:emo_chat_mobile/ui/login/login_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
@@ -18,19 +15,6 @@ class _LoginViewState extends State<LoginView> {
   final _key = GlobalKey<FormState>(); // for the future update for login feature
   TextEditingController idArea = TextEditingController();
   TextEditingController pwdArea = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    //initialization();
-  }
-
-  void initialization() async {
-    await Permission.camera.request();
-    await Permission.photos.request();
-
-    FlutterNativeSplash.remove();
-  }
 
   @override
   Widget build(BuildContext context) {

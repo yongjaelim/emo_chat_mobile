@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -15,7 +17,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    getPermissions();
+
+    Timer(const Duration(milliseconds: 500), (){
+      getPermissions();
+    });
   }
 
   void getPermissions() async {
