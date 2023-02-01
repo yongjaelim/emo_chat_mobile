@@ -22,7 +22,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   void initState() {
     super.initState();
-    initialization();
+    //initialization();
   }
 
   void initialization() async {
