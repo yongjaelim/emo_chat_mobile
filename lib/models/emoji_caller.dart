@@ -4,9 +4,9 @@ import 'emoji.dart';
 import 'package:http/http.dart' as http;
 
 class EmojiCaller {
-  Uri uri = Uri.parse('http://chatdev.fasoo.com:8090/api/emoji/people');
 
-  Future<List<Emoji>> getEmojis() async {
+  Future<List<Emoji>> getEmojis(String category) async {
+    Uri uri = Uri.parse('http://chatdev.fasoo.com:8090/api/emoji/$category');
     List<Emoji> emojis = [];
 
     final http.Response response = await http.get(uri);
@@ -22,7 +22,8 @@ class EmojiCaller {
     return emojis;
   }
 
-  Future<List<String>> getUnicodes() async {
+  Future<List<String>> getUnicodes(String category) async {
+    Uri uri = Uri.parse('http://chatdev.fasoo.com:8090/api/emoji/$category');
     List<String> unicodes = [];
     List<Emoji> emojis = [];
 

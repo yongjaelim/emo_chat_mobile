@@ -5,17 +5,25 @@ import '../../models/emoji.dart';
 
 class EmojiViewModel extends ChangeNotifier {
 
-  List<Emoji> emojis = <Emoji>[];
-  List<String> unicodes = <String>[];
+  List<Emoji> _emojis = <Emoji>[];
+  List<String> _unicodes = <String>[];
 
-  void getEmojis() async {
-    emojis = await EmojiCaller().getEmojis();
+  List<Emoji> get emojis => _emojis;
+  List<String> get unicodes => _unicodes;
+
+  EmojiViewModel() {
+    getEmojis('people');
+    getUnicodes('people');
+  }
+
+  void getEmojis(String category) async {
+    _emojis = await EmojiCaller().getEmojis(category);
     notifyListeners();
   }
 
-  void getUnicodes() async {
-    getEmojis();
-    unicodes = await EmojiCaller().getUnicodes();
+  void getUnicodes(String category) async {
+    getEmojis(category);
+    _unicodes = await EmojiCaller().getUnicodes(category);
     notifyListeners();
   }
 }
