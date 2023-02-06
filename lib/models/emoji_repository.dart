@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'emoji.dart';
 import 'package:http/http.dart' as http;
 
-class EmojiCaller {
+class EmojiRepositary {
 
   Future<List<Emoji>> getEmojis(String category) async {
     Uri uri = Uri.parse('http://chatdev.fasoo.com:8090/api/emoji/$category');
@@ -17,6 +17,8 @@ class EmojiCaller {
       emojis = jsonDecode(jsonData).map<Emoji>((item) {
         return Emoji.fromJson(item);
       }).toList();
+    } else {
+      throw Exception('이모지 호출에 실패했습니다!');
     }
     return emojis;
   }
@@ -44,7 +46,11 @@ class EmojiCaller {
         }
         return finedUnicode;
       }).toList();
+
+      return unicodes.isNotEmpty ? unicodes : [];
+    } else {
+      throw Exception('이모지 호출에 실패했습니다!');
     }
-    return unicodes.isNotEmpty ? unicodes : [];
+
   }
 }

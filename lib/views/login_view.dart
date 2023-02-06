@@ -12,6 +12,8 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
 
+  static String routeName = "/login_view";
+
   final _key = GlobalKey<FormState>(); // for the future update for login feature
   TextEditingController idArea = TextEditingController();
   TextEditingController pwdArea = TextEditingController();

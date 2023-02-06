@@ -2,6 +2,8 @@ import 'package:emo_chat_mobile/views/emoji_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'chatting_room/chat_view.dart';
+
 class ChattingListView extends StatefulWidget {
   const ChattingListView({Key? key}) : super(key: key);
 
@@ -18,16 +20,8 @@ class _ChattingListViewState extends State<ChattingListView> {
       'assets/images/2.png',
       'assets/images/3.png'
     ];
-    var messageSentTimeList = [
-      '오후 4:30',
-      '어제',
-      '2022/12/31'
-    ];
-    var messageList = [
-      '안녕하세요!',
-      '안녕',
-      '새해 복 많이 받으세요'
-    ];
+    var messageSentTimeList = ['오후 4:30', '어제', '2022/12/31'];
+    var messageList = ['안녕하세요!', '안녕', '새해 복 많이 받으세요'];
     final bool lightMode = Theme.of(context).brightness == Brightness.light;
     final Color textColor = lightMode ? Colors.black : Colors.white;
     return Scaffold(
@@ -36,10 +30,7 @@ class _ChattingListViewState extends State<ChattingListView> {
         centerTitle: false,
         title: const Text(
           'Chatting',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 30
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
         ),
         //backgroundColor: lightMode ? Colors.white : Colors.black12,
         actions: [
@@ -60,7 +51,9 @@ class _ChattingListViewState extends State<ChattingListView> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.popUntil(context, (route) => route.isFirst);
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          //Navigator.popUntil(context, (route) => route.isFirst);
                         },
                         child: const Text('예'),
                       )
@@ -80,10 +73,14 @@ class _ChattingListViewState extends State<ChattingListView> {
           return InkWell(
             onTap: () {
               Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                      builder: (context) =>
-                          EmojiView()));
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => ChatView(
+                    userName: userList[index],
+                    index: index,
+                  ),
+                ),
+              );
             },
             child: Card(
               child: Container(
@@ -121,9 +118,7 @@ class _ChattingListViewState extends State<ChattingListView> {
                             Text(
                               messageList[index],
                               style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w100
-                              ),
+                                  fontSize: 15, fontWeight: FontWeight.w100),
                             )
                           ],
                         ),

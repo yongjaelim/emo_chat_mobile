@@ -1,9 +1,9 @@
 class Emoji {
-  late final int emojiId;
-  late final String keyword;
-  late final String koKeyword;
-  late final String unicode;
-  late final String category;
+  final int emojiId;
+  final String keyword;
+  final String koKeyword;
+  final String unicode;
+  final String category;
 
   Emoji({required this.emojiId, required this.keyword, required this.koKeyword, required this.unicode,
       required this.category});

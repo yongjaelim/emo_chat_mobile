@@ -1,4 +1,4 @@
-import 'package:emo_chat_mobile/models/emoji_caller.dart';
+import 'package:emo_chat_mobile/models/emoji_repository.dart';
 import 'package:flutter/material.dart';
 import '../models/emoji.dart';
 
@@ -41,25 +41,25 @@ class EmojiViewModel extends ChangeNotifier {
   }
 
   void getEmojis() async {
-    _emojisPeople = await EmojiCaller().getEmojis('people');
-    _emojisNature = await EmojiCaller().getEmojis('nature');
-    _emojisFood = await EmojiCaller().getEmojis('food');
-    _emojisTravel = await EmojiCaller().getEmojis('travel');
-    _emojisActivity = await EmojiCaller().getEmojis('activity');
-    _emojisObject = await EmojiCaller().getEmojis('object');
-    _emojisSymbol = await EmojiCaller().getEmojis('symbol');
+    _emojisPeople = await EmojiRepositary().getEmojis('people');
+    _emojisNature = await EmojiRepositary().getEmojis('nature');
+    _emojisFood = await EmojiRepositary().getEmojis('food');
+    _emojisTravel = await EmojiRepositary().getEmojis('travel');
+    _emojisActivity = await EmojiRepositary().getEmojis('activity');
+    _emojisObject = await EmojiRepositary().getEmojis('object');
+    _emojisSymbol = await EmojiRepositary().getEmojis('symbol');
     notifyListeners();
   }
 
   void getUnicodes() async {
     getEmojis();
-    _unicodesPeople = await EmojiCaller().getUnicodes('people');
-    _unicodesNature = await EmojiCaller().getUnicodes('nature');
-    _unicodesFood = await EmojiCaller().getUnicodes('food');
-    _unicodesTravel = await EmojiCaller().getUnicodes('travel');
-    _unicodesActivity = await EmojiCaller().getUnicodes('activity');
-    _unicodesObject = await EmojiCaller().getUnicodes('object');
-    _unicodesSymbol = await EmojiCaller().getUnicodes('symbol');
+    _unicodesPeople = await EmojiRepositary().getUnicodes('people');
+    _unicodesNature = await EmojiRepositary().getUnicodes('nature');
+    _unicodesFood = await EmojiRepositary().getUnicodes('food');
+    _unicodesTravel = await EmojiRepositary().getUnicodes('travel');
+    _unicodesActivity = await EmojiRepositary().getUnicodes('activity');
+    _unicodesObject = await EmojiRepositary().getUnicodes('object');
+    _unicodesSymbol = await EmojiRepositary().getUnicodes('symbol');
     notifyListeners();
   }
 }
