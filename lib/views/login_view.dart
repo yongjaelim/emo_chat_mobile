@@ -1,5 +1,5 @@
-import 'package:emo_chat_mobile/ui/chatting_list/chatting_list_view.dart';
-import 'package:emo_chat_mobile/ui/login/login_view_model.dart';
+import 'package:emo_chat_mobile/views/chatting_list_view.dart';
+import 'package:emo_chat_mobile/view_models/login_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

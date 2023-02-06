@@ -18,7 +18,6 @@ class EmojiCaller {
         return Emoji.fromJson(item);
       }).toList();
     }
-
     return emojis;
   }
 
@@ -46,7 +45,6 @@ class EmojiCaller {
         return finedUnicode;
       }).toList();
     }
-
     return unicodes.isNotEmpty ? unicodes : [];
   }
 }

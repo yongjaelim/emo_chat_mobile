@@ -15,5 +15,4 @@ class Emoji {
       unicode: json['unicode'],
       category: json['category'],);
   }
-
 }

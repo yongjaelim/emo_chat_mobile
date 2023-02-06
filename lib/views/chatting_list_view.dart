@@ -1,4 +1,4 @@
-import 'package:emo_chat_mobile/ui/emoji/emoji_view.dart';
+import 'package:emo_chat_mobile/views/emoji_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
