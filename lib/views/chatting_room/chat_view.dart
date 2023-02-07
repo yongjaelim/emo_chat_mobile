@@ -1,7 +1,10 @@
 import 'package:emo_chat_mobile/view_models/message_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../models/message.dart';
+import '../../view_models/emoji_view_model.dart';
+import '../emoji_view.dart';
 import 'chat_bubble.dart';
 
 class ChatView extends StatefulWidget {
@@ -79,16 +82,26 @@ class _ChatViewState extends State<ChatView> {
               maxLines: null,
               controller: _textController,
               decoration: InputDecoration(
-                labelText: '메시지를 입력해주세요.',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                filled: true,
-                fillColor: Colors.grey[200],
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 20.0,
-                  vertical: 5.0,
-                ),
+                  labelText: '메시지를 입력해주세요.',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 20.0,
+                    vertical: 5.0,
+                  ),
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.sentiment_neutral),
+                    onPressed:
+                        () {
+                      Navigator.push(
+                          context, MaterialPageRoute(
+                          builder: (context) => EmojiView()
+                      ));
+                    },
+                  )
               ),
               onChanged: (text) {
                 setState(() {});
@@ -101,8 +114,8 @@ class _ChatViewState extends State<ChatView> {
           ElevatedButton(
             onPressed: _textController.text.isNotEmpty
                 ? () {
-                    _sendMessage(messageViewModel);
-                  }
+              _sendMessage(messageViewModel);
+            }
                 : null,
             style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
@@ -132,5 +145,188 @@ class _ChatViewState extends State<ChatView> {
     );
     _textController.clear();
     setState(() {});
+  }
+
+  Widget _emojiList() {
+    return DefaultTabController(
+      length: 7,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: TabBar(
+            tabs: [
+              Text(
+                '\u{1F600}',
+                style: GoogleFonts.notoEmoji(),
+              ),
+              Text(
+                '\u{1F331}',
+                style: GoogleFonts.notoEmoji(),
+              ),
+              Text(
+                '\u{1F355}',
+                style: GoogleFonts.notoEmoji(),
+              ),
+              Text(
+                '\u{2708}',
+                style: GoogleFonts.notoEmoji(),
+              ),
+              Text(
+                '\u{26BD}',
+                style: GoogleFonts.notoEmoji(),
+              ),
+              Text(
+                '\u{1F451}',
+                style: GoogleFonts.notoEmoji(),
+              ),
+              Text(
+                '\u{2705}',
+                style: GoogleFonts.notoEmoji(),
+              ),
+            ],
+            isScrollable: true,
+
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            GestureDetector(
+              onTap: () {},
+              child: GridView.count(
+                scrollDirection: Axis.vertical,
+                crossAxisCount: 8,
+                children: [
+                  for (int i = 0; i < EmojiViewModel.unicodesPeople.length; i++)
+                    SizedBox(
+                      child: TextButton(
+                        onPressed: () {
+                          print(EmojiViewModel.unicodesPeople[i]);
+                        },
+                        child: Text(
+                          EmojiViewModel.unicodesPeople[i],
+                          style: GoogleFonts.notoColorEmoji(),
+                        ),
+                      ),
+                    )
+                ],
+              ),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: GridView.count(
+                scrollDirection: Axis.vertical,
+                crossAxisCount: 8,
+                children: [
+                  for (int i = 0; i < EmojiViewModel.unicodesNature.length; i++)
+                    SizedBox(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          EmojiViewModel.unicodesNature[i],
+                          style: GoogleFonts.notoColorEmoji(),
+                        ),
+                      ),
+                    )
+                ],
+              ),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: GridView.count(
+                scrollDirection: Axis.vertical,
+                crossAxisCount: 8,
+                children: [
+                  for (int i = 0; i < EmojiViewModel.unicodesFood.length; i++)
+                    SizedBox(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          EmojiViewModel.unicodesFood[i],
+                          style: GoogleFonts.notoColorEmoji(),
+                        ),
+                      ),
+                    )
+                ],
+              ),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: GridView.count(
+                scrollDirection: Axis.vertical,
+                crossAxisCount: 8,
+                children: [
+                  for (int i = 0; i < EmojiViewModel.unicodesTravel.length; i++)
+                    SizedBox(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          EmojiViewModel.unicodesTravel[i],
+                          style: GoogleFonts.notoColorEmoji(),
+                        ),
+                      ),
+                    )
+                ],
+              ),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: GridView.count(
+                scrollDirection: Axis.vertical,
+                crossAxisCount: 8,
+                children: [
+                  for (int i = 0; i < EmojiViewModel.unicodesActivity.length; i++)
+                    SizedBox(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          EmojiViewModel.unicodesActivity[i],
+                          style: GoogleFonts.notoColorEmoji(),
+                        ),
+                      ),
+                    )
+                ],
+              ),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: GridView.count(
+                scrollDirection: Axis.vertical,
+                crossAxisCount: 8,
+                children: [
+                  for (int i = 0; i < EmojiViewModel.unicodesObject.length; i++)
+                    SizedBox(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          EmojiViewModel.unicodesObject[i],
+                          style: GoogleFonts.notoColorEmoji(),
+                        ),
+                      ),
+                    )
+                ],
+              ),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: GridView.count(
+                scrollDirection: Axis.vertical,
+                crossAxisCount: 8,
+                children: [
+                  for (int i = 0; i < EmojiViewModel.unicodesSymbol.length; i++)
+                    SizedBox(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          EmojiViewModel.unicodesSymbol[i],
+                          style: GoogleFonts.notoColorEmoji(),
+                        ),
+                      ),
+                    )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
