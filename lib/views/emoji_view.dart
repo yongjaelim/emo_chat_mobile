@@ -18,7 +18,6 @@ class _EmojiViewState extends State<EmojiView> {
   void initState() {
     super.initState();
     emojiViewModel = EmojiViewModel();
-    //emojiViewModel = Provider.of<EmojiViewModel>(context);
     emojiViewModel.getEmojis();
     _unicodesPeople = emojiViewModel.unicodesPeople;
     print('line19');
@@ -27,7 +26,6 @@ class _EmojiViewState extends State<EmojiView> {
 
   @override
   Widget build(BuildContext context) {
-    emojiViewModel = Provider.of<EmojiViewModel>(context);
     return Consumer<EmojiViewModel>(
       builder: (context, provider, child) {
         if (provider.emojisActivity != null && provider.emojisActivity.length > 0) {
@@ -35,7 +33,6 @@ class _EmojiViewState extends State<EmojiView> {
             length: 7,
             child: Scaffold(
               appBar: AppBar(
-                //title: Text(),
                 bottom: TabBar(
                   tabs: [
                     Text(

@@ -1,7 +1,9 @@
 import 'package:emo_chat_mobile/views/emoji_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import '../models/message.dart';
+import '../view_models/message_view_model.dart';
 import 'chatting_room/chat_view.dart';
 
 class ChattingListView extends StatefulWidget {
@@ -20,10 +22,8 @@ class _ChattingListViewState extends State<ChattingListView> {
       'assets/images/2.png',
       'assets/images/3.png'
     ];
-    var messageSentTimeList = ['오후 4:30', '어제', '2022/12/31'];
-    var messageList = ['안녕하세요!', '안녕', '새해 복 많이 받으세요'];
-    final bool lightMode = Theme.of(context).brightness == Brightness.light;
-    final Color textColor = lightMode ? Colors.black : Colors.white;
+
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -32,7 +32,6 @@ class _ChattingListViewState extends State<ChattingListView> {
           'Chatting',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
         ),
-        //backgroundColor: lightMode ? Colors.white : Colors.black12,
         actions: [
           IconButton(
             onPressed: () {
@@ -75,7 +74,10 @@ class _ChattingListViewState extends State<ChattingListView> {
               Navigator.push(
                 context,
                 CupertinoPageRoute(
-                  builder: (context) => ChatView(
+                  builder: (context) =>
+                      // EmojiView()
+
+                      ChatView(
                     userName: userList[index],
                     index: index,
                   ),
@@ -84,7 +86,7 @@ class _ChattingListViewState extends State<ChattingListView> {
             },
             child: Card(
               child: Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -115,10 +117,14 @@ class _ChattingListViewState extends State<ChattingListView> {
                             const SizedBox(
                               height: 5,
                             ),
-                            Text(
-                              messageList[index],
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w100),
+                            Consumer<MessageViewModel>(
+                              builder: (context, messageViewModel, child) {
+                                return Text(
+                                  messageViewModel.messageList[index],
+                                  style: const TextStyle(
+                                      fontSize: 15, fontWeight: FontWeight.w100),
+                                );
+                              },
                             )
                           ],
                         ),
@@ -129,13 +135,17 @@ class _ChattingListViewState extends State<ChattingListView> {
                         alignment: Alignment.centerRight,
                         child: Column(
                           children: [
-                            Text(
-                              messageSentTimeList[index],
-                              style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w100,
-                              ),
-                              textAlign: TextAlign.end,
+                            Consumer<MessageViewModel>(
+                              builder: (context, messageViewModel, child) {
+                                return Text(
+                                  messageViewModel.messageSentTimeList[index],
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w100,
+                                  ),
+                                  textAlign: TextAlign.end,
+                                );
+                              },
                             ),
                           ],
                         ),
