@@ -51,6 +51,5 @@ class EmojiRepositary {
     } else {
       throw Exception('이모지 호출에 실패했습니다!');
     }
-
   }
 }

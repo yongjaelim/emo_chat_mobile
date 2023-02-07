@@ -1,8 +1,6 @@
-import 'package:emo_chat_mobile/views/emoji_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/message.dart';
 import '../view_models/message_view_model.dart';
 import 'chatting_room/chat_view.dart';
 

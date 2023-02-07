@@ -3,5 +3,9 @@ class Message {
   late String message;
   late int roomIdx;
 
-  Message({required this.userId, required this.message, required this.roomIdx});
+  Message({
+    required this.userId,
+    required this.message,
+    required this.roomIdx,
+  });
 }
