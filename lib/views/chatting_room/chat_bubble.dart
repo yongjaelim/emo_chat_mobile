@@ -25,7 +25,6 @@ class ChatBubble extends StatelessWidget {
                   bottomLeft:  isMyself ? const Radius.circular(12) : const Radius.circular(0),
               )
             ),
-            // width:
             constraints: BoxConstraints(
               maxWidth: MediaQuery.of(context).size.width * 0.48,
             ),

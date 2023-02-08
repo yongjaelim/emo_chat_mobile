@@ -3,18 +3,14 @@ import 'package:emo_chat_mobile/view_models/login_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({Key? key}) : super(key: key);
+class LoginView extends StatelessWidget {
 
-  @override
-  State<LoginView> createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<LoginView> {
-
-  final _key = GlobalKey<FormState>(); // for the future update for login feature
+  final _key = GlobalKey<FormState>();
+ // for the future update for login feature
   TextEditingController idArea = TextEditingController();
   TextEditingController pwdArea = TextEditingController();
+
+  LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +82,7 @@ class _LoginViewState extends State<LoginView> {
                       loginViewModel.setPassword(text);
                     },
                     onFieldSubmitted: loginViewModel.getButtonEnabled ? (value) {
-                      submit();
+                      submit(context);
                       loginViewModel.makeFieldsEmpty();
                     } : null,
                   );
@@ -104,7 +100,7 @@ class _LoginViewState extends State<LoginView> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: loginViewModel.getButtonEnabled ? () {
-                        submit();
+                        submit(context);
                         loginViewModel.makeFieldsEmpty();
                       } : null,
                       style: ElevatedButton.styleFrom(
@@ -122,7 +118,7 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  void submit() {
+  void submit(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(
         builder: (context) => const ChattingListView()
     ));
@@ -130,6 +126,5 @@ class _LoginViewState extends State<LoginView> {
     idArea.clear();
     pwdArea.clear();
   }
-
 }
 

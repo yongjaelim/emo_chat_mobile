@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    EmojiViewModel.getUnicodes();
+    //EmojiViewModel.getUnicodes();
     print("splash page line 24");
     Timer(const Duration(milliseconds: 500), (){
       getPermissions();
@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const LoginView()),
+      MaterialPageRoute(builder: (context) => LoginView()),
     );
   }
 

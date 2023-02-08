@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 
 class LoginViewModel with ChangeNotifier {
-  String id = '';
-  String password = '';
+  String _id = '';
+  String _password = '';
   bool _buttonEnabled = false;
 
-  String get getId => id;
-  String get getPassword => password;
+  String get getId => _id;
+  String get getPassword => _password;
   bool get getButtonEnabled => _buttonEnabled;
 
   void setId(String value) {
-    id = value;
+    _id = value;
     _updateButtonEnabled();
     notifyListeners();
   }
 
   void setPassword(String value) {
-    password = value;
+    _password = value;
     _updateButtonEnabled();
     notifyListeners();
   }
 
   void _updateButtonEnabled() {
-    _buttonEnabled = id.isNotEmpty && password.isNotEmpty;
+    _buttonEnabled = _id.isNotEmpty && _password.isNotEmpty;
   }
 
   void makeFieldsEmpty() {

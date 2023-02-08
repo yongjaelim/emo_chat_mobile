@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
                 backgroundColor: Colors.white,
                 foregroundColor: Colors.black),
           ),
-          routes: {"/login": (context) => const LoginView()},
+          routes: {"/login": (context) => LoginView()},
           home: const SplashScreen()),
     );
   }
