@@ -1,11 +1,6 @@
 import 'dart:async';
-
-import 'package:emo_chat_mobile/models/emoji_repository.dart';
-import 'package:emo_chat_mobile/view_models/emoji_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:provider/provider.dart';
-
 import 'login_view.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -20,7 +15,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    //EmojiViewModel.getUnicodes();
     print("splash page line 24");
     Timer(const Duration(milliseconds: 500), (){
       getPermissions();
