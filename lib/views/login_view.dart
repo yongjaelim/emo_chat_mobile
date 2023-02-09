@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 
 class LoginView extends StatelessWidget {
 
-  final _key = GlobalKey<FormState>();
  // for the future update for login feature
   TextEditingController idArea = TextEditingController();
   TextEditingController pwdArea = TextEditingController();
@@ -37,7 +36,6 @@ class LoginView extends StatelessWidget {
 
   Widget _loginForm() {
     return Form(
-      key: _key,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

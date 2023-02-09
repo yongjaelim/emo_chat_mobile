@@ -4,14 +4,9 @@ import 'package:provider/provider.dart';
 import '../view_models/message_view_model.dart';
 import 'chatting_room/chat_view.dart';
 
-class ChattingListView extends StatefulWidget {
+class ChattingListView extends StatelessWidget {
   const ChattingListView({Key? key}) : super(key: key);
 
-  @override
-  State<ChattingListView> createState() => _ChattingListViewState();
-}
-
-class _ChattingListViewState extends State<ChattingListView> {
   @override
   Widget build(BuildContext context) {
     var userList = ['김민욱', '이제훈', '박명수'];

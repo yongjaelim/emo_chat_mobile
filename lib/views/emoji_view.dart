@@ -67,7 +67,7 @@ class EmojiView extends StatelessWidget {
             child: Text(
               emojiList[index],
               style: const TextStyle(
-                  fontFamily: 'NotoColorEmoji',
+                  //fontFamily: 'NotoColorEmoji',
                   fontSize: 25
               ),
             ),

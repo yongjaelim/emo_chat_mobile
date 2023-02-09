@@ -2,85 +2,89 @@ import 'dart:async';
 import 'package:emo_chat_mobile/view_models/message_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../models/message.dart';
 import '../emoji_view.dart';
 import 'chat_bubble.dart';
 
-class ChatView extends StatefulWidget {
-  const ChatView({Key? key, required this.userName, required this.index})
+class ChatView extends StatelessWidget {
+  ChatView({Key? key, required this.userName, required this.index})
       : super(key: key);
   final String userName;
   final int index;
 
-  @override
-  State<ChatView> createState() => _ChatViewState();
-}
-
-class _ChatViewState extends State<ChatView> {
   final TextEditingController _textController = TextEditingController();
+
   final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    Timer(const Duration(milliseconds: 1), () => _scrollController.jumpTo(_scrollController.position.maxScrollExtent));
+    Timer(
+        const Duration(milliseconds: 1),
+        () => _scrollController
+            .jumpTo(_scrollController.position.maxScrollExtent));
     return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            widget.userName,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Scaffold(
+            resizeToAvoidBottomInset: true,
+            appBar: AppBar(
+              title: Text(
+                userName,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-          ),
-        ),
-        body: Consumer<MessageViewModel>(
-          builder: (context, messageViewModel, child) {
-            return Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    controller: _scrollController,
-                    itemCount: messageViewModel.messageList.length,
-                    itemBuilder: (context, index) {
-                      if (messageViewModel.messageList[index].roomIdx ==
-                          widget.index) {
-                        return ChatBubble(
-                          messageViewModel.messageList[index].message,
-                          messageViewModel.messageList[index].userId == 0,
-                        );
-                      } else {
-                        return const SizedBox(height: 0);
-                      }
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                _newMessage(messageViewModel),
-              ],
-            );
-          },
-        )
-      )
-    );
+            body: Consumer<MessageViewModel>(
+              builder: (context, messageViewModel, child) {
+                return Column(
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        controller: _scrollController,
+                        itemCount: messageViewModel.messageList.length + 1,
+                        itemBuilder: (context, index) {
+                          if (index == messageViewModel.messageList.length) {
+                            return Container(
+                              height: 50,
+                            );
+                          }
+                          //print(index);
+                          if (messageViewModel.messageList[index].roomIdx ==
+                              this.index) {
+                            return ChatBubble(
+                              messageViewModel.messageList[index].message,
+                              messageViewModel.messageList[index].userId == 0,
+                            );
+
+                          } else {
+                            return const SizedBox(height: 0);
+                          }
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    _newMessage(messageViewModel, context)
+                  ],
+                );
+              },
+            )));
   }
 
-  Widget _newMessage(MessageViewModel messageViewModel) {
+  Widget _newMessage(MessageViewModel messageViewModel, BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(
-        top: 10,
-        bottom: 20,
-        left: 20,
-        right: 20,
-      ),
+      padding: const EdgeInsets.all(15),
       child: Row(
         children: [
           Expanded(
             child: TextField(
+              autofocus: true,
+              onTap: () => _scrollController.animateTo(
+                  _scrollController.position.maxScrollExtent,
+                  duration: const Duration(milliseconds: 10),
+                  curve: Curves.easeIn),
               maxLines: null,
               controller: _textController,
               decoration: InputDecoration(
@@ -102,7 +106,8 @@ class _ChatViewState extends State<ChatView> {
                     },
                   )),
               onChanged: (text) {
-                setState(() {});
+                //setState(() {});
+                messageViewModel.setMessage(text);
               },
             ),
           ),
@@ -110,7 +115,7 @@ class _ChatViewState extends State<ChatView> {
             width: 5,
           ),
           ElevatedButton(
-            onPressed: _textController.text.isNotEmpty
+            onPressed: messageViewModel.getButtonEnabled
                 ? () {
                     _sendMessage(messageViewModel);
                   }
@@ -126,41 +131,11 @@ class _ChatViewState extends State<ChatView> {
   }
 
   void _sendMessage(MessageViewModel messageViewModel) {
-    Message inputMessage = Message(
-      userId: 0,
-      message: _textController.text,
-      roomIdx: widget.index,
-    );
-    messageViewModel.updatePreviewMessageList(
-      widget.index,
-      _textController.text,
-    );
-    // _scrollController.animateTo(
-    //   _scrollController.position.maxScrollExtent * 1.2,
-    //   duration: const Duration(milliseconds: 300),
-    //   curve: Curves.easeOut,
-    // );
-    _scrollAnimateToEnd(_scrollController);
-    _textController.clear();
-  }
+    messageViewModel.sendMessage(
+        index, _textController.text, _scrollController);
 
-  void _scrollAnimateToEnd(ScrollController scrollController) {
-    Future.delayed(const Duration(milliseconds: 10)).then((_) {
-      try {
-        scrollController.animateTo(
-          scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 100),
-          curve: Curves.easeOut,
-        ).then((value) {
-          scrollController.animateTo(
-            scrollController.position.maxScrollExtent,
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.easeOut,
-          );
-        });
-      } catch (e) {
-        print('error on scroll $e');
-      }
-    });
+    messageViewModel.setMessage('');
+
+    _textController.clear();
   }
 }
