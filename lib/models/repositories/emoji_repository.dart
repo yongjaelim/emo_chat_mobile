@@ -34,7 +34,7 @@ class EmojiRepositary {
         return Emoji.fromJson(item);
       }).toList();
 
-      unicodes = emojis.map<String>((emoji) {
+      unicodes = emojis.map((emoji) {
         String emojiUnicode = emoji.unicode;
         List<String> unicodeModifierList = emojiUnicode.split(' ');
         String finedUnicode = '';

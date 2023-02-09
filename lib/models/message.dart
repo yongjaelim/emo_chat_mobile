@@ -8,4 +8,6 @@ class Message {
     required this.message,
     required this.roomIdx,
   });
+
+  // it needs toJason method to upload message data to server
 }

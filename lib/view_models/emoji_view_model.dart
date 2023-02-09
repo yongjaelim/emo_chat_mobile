@@ -5,6 +5,8 @@ import '../models/emoji.dart';
 
 class EmojiViewModel extends ChangeNotifier {
 
+  late EmojiRepositary _emojiRepositary;
+
   List<Emoji> _emojisPeople = <Emoji>[];
   List<String> _unicodesPeople = <String>[];
   List<Emoji> _emojisNature = <Emoji>[];
@@ -36,29 +38,30 @@ class EmojiViewModel extends ChangeNotifier {
   List<String> get unicodesSymbol => _unicodesSymbol;
 
   EmojiViewModel() {
+    _emojiRepositary = EmojiRepositary();
     getUnicodes();
   }
 
   void getEmojis() async {
-    _emojisPeople = await EmojiRepositary().getEmojis('people');
-    _emojisNature = await EmojiRepositary().getEmojis('nature');
-    _emojisFood = await EmojiRepositary().getEmojis('food');
-    _emojisTravel = await EmojiRepositary().getEmojis('travel');
-    _emojisActivity = await EmojiRepositary().getEmojis('activity');
-    _emojisObject = await EmojiRepositary().getEmojis('object');
-    _emojisSymbol = await EmojiRepositary().getEmojis('symbol');
+    _emojisPeople = await _emojiRepositary.getEmojis('people');
+    _emojisNature = await _emojiRepositary.getEmojis('nature');
+    _emojisFood = await _emojiRepositary.getEmojis('food');
+    _emojisTravel = await _emojiRepositary.getEmojis('travel');
+    _emojisActivity = await _emojiRepositary.getEmojis('activity');
+    _emojisObject = await _emojiRepositary.getEmojis('object');
+    _emojisSymbol = await _emojiRepositary.getEmojis('symbol');
     notifyListeners();
   }
 
   void getUnicodes() async {
     getEmojis();
-    _unicodesPeople = await EmojiRepositary().getUnicodes('people');
-    _unicodesNature = await EmojiRepositary().getUnicodes('nature');
-    _unicodesFood = await EmojiRepositary().getUnicodes('food');
-    _unicodesTravel = await EmojiRepositary().getUnicodes('travel');
-    _unicodesActivity = await EmojiRepositary().getUnicodes('activity');
-    _unicodesObject = await EmojiRepositary().getUnicodes('object');
-    _unicodesSymbol = await EmojiRepositary().getUnicodes('symbol');
+    _unicodesPeople = await _emojiRepositary.getUnicodes('people');
+    _unicodesNature = await _emojiRepositary.getUnicodes('nature');
+    _unicodesFood = await _emojiRepositary.getUnicodes('food');
+    _unicodesTravel = await _emojiRepositary.getUnicodes('travel');
+    _unicodesActivity = await _emojiRepositary.getUnicodes('activity');
+    _unicodesObject = await _emojiRepositary.getUnicodes('object');
+    _unicodesSymbol = await _emojiRepositary.getUnicodes('symbol');
     print("emoji view model line 62");
     print(_unicodesPeople.length);
     notifyListeners();
