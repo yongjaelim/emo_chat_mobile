@@ -15,26 +15,26 @@ class EmojiView extends StatelessWidget {
             appBar: AppBar(
               bottom: TabBar(
                 tabs: [
-                  emojiCategoryMenu('\u{1F600}'),
-                  emojiCategoryMenu('\u{1F331}'),
-                  emojiCategoryMenu('\u{1F355}'),
-                  emojiCategoryMenu('\u{26BD}'),
-                  emojiCategoryMenu('\u{1F451}'),
-                  emojiCategoryMenu('\u{2705}'),
-                  emojiCategoryMenu('\u{2708}')
+                  _emojiCategoryMenu('\u{1F600}'),
+                  _emojiCategoryMenu('\u{1F331}'),
+                  _emojiCategoryMenu('\u{1F355}'),
+                  _emojiCategoryMenu('\u{26BD}'),
+                  _emojiCategoryMenu('\u{1F451}'),
+                  _emojiCategoryMenu('\u{2705}'),
+                  _emojiCategoryMenu('\u{2708}')
                 ],
                 isScrollable: true,
               ),
             ),
             body: TabBarView(
               children: [
-                emojiCategory(emojiViewModel.unicodesPeople),
-                emojiCategory(emojiViewModel.unicodesNature),
-                emojiCategory(emojiViewModel.unicodesFood),
-                emojiCategory(emojiViewModel.unicodesActivity),
-                emojiCategory(emojiViewModel.unicodesObject),
-                emojiCategory(emojiViewModel.unicodesSymbol),
-                emojiCategory(emojiViewModel.unicodesTravel)
+                _emojiCategory(emojiViewModel.unicodesPeople),
+                _emojiCategory(emojiViewModel.unicodesNature),
+                _emojiCategory(emojiViewModel.unicodesFood),
+                _emojiCategory(emojiViewModel.unicodesActivity),
+                _emojiCategory(emojiViewModel.unicodesObject),
+                _emojiCategory(emojiViewModel.unicodesSymbol),
+                _emojiCategory(emojiViewModel.unicodesTravel)
               ],
             ),
           ),
@@ -43,7 +43,7 @@ class EmojiView extends StatelessWidget {
     );
   }
 
-  Widget emojiCategoryMenu(String unicode) {
+  Widget _emojiCategoryMenu(String unicode) {
     return Text(
       unicode,
       style: const TextStyle(
@@ -52,7 +52,7 @@ class EmojiView extends StatelessWidget {
     );
   }
 
-  Widget emojiCategory(List<String> emojiList) {
+  Widget _emojiCategory(List<String> emojiList) {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 8,
@@ -67,7 +67,7 @@ class EmojiView extends StatelessWidget {
             child: Text(
               emojiList[index],
               style: const TextStyle(
-                  //fontFamily: 'NotoColorEmoji',
+                  fontFamily: 'NotoColorEmoji',
                   fontSize: 25
               ),
             ),

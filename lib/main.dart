@@ -1,7 +1,6 @@
 import 'package:emo_chat_mobile/view_models/emoji_view_model.dart';
 import 'package:emo_chat_mobile/view_models/login_view_model.dart';
 import 'package:emo_chat_mobile/view_models/message_view_model.dart';
-import 'package:emo_chat_mobile/views/login_view.dart';
 import 'package:emo_chat_mobile/views/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +37,6 @@ class MyApp extends StatelessWidget {
                 backgroundColor: Colors.white,
                 foregroundColor: Colors.black),
           ),
-          routes: {"/login": (context) => LoginView()},
           home: const SplashScreen()),
     );
   }

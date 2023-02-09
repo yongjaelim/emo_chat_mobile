@@ -10,12 +10,18 @@ class LoginViewModel with ChangeNotifier {
   bool get getButtonEnabled => _buttonEnabled;
 
   void setId(String value) {
+    if (_id == value) {
+      return;
+    }
     _id = value;
     _updateButtonEnabled();
     notifyListeners();
   }
 
   void setPassword(String value) {
+    if (_password == value) {
+      return;
+    }
     _password = value;
     _updateButtonEnabled();
     notifyListeners();

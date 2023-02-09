@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'emoji.dart';
+import '../emoji.dart';
 import 'package:http/http.dart' as http;
 
 class EmojiRepositary {
@@ -13,8 +12,7 @@ class EmojiRepositary {
 
     if (response.statusCode == 200) {
       String jsonData = response.body;
-
-      emojis = jsonDecode(jsonData).map<Emoji>((item) {
+      emojis = jsonDecode(jsonData).map((item) {
         return Emoji.fromJson(item);
       }).toList();
     } else {
@@ -46,10 +44,9 @@ class EmojiRepositary {
         }
         return finedUnicode;
       }).toList();
-
-      return unicodes.isNotEmpty ? unicodes : [];
     } else {
       throw Exception('이모지 호출에 실패했습니다!');
     }
+    return unicodes;
   }
 }

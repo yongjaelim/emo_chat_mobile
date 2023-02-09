@@ -1,23 +1,27 @@
+import 'package:emo_chat_mobile/models/repositories/message_repository.dart';
 import 'package:flutter/material.dart';
 
 import '../models/message.dart';
 
 class MessageViewModel with ChangeNotifier {
-  List<Message> messages = [
-    Message(userId: 1, message: '안녕하세요!', roomIdx: 0),
-    Message(userId: 2, message: '안녕', roomIdx: 1),
-    Message(userId: 3, message: '새해 복 많이 받으세요.', roomIdx: 2)
-  ]; //dummy data
+  late MessageRepository _messageViewModel;
 
-  List<String> messageList = ['안녕하세요!', '안녕', '새해 복 많이 받으세요']; // dummy data
-  List<String> messageSentTimeList = ['오후 4:30', '어제', '2022/12/31']; // dummy data
+  MessageViewModel() {
+    _messageViewModel = MessageRepository();
+  }
+
+  List<Message> get messageList => _messageViewModel.messageList;
+  List<String> get messageSentTimeList => _messageViewModel.messageSentTimeList;
+  List<String> get messagePreviewList => _messageViewModel.messagePreviewList;
 
   void updatePreviewMessageList(int roomIdx, String message) {
-    DateTime now = DateTime.now();
-    String currentTime = now.toString();
-    var parsedTime = DateTime.parse(currentTime).toString();
-    messageSentTimeList[roomIdx] = parsedTime;
-    messageList[roomIdx] = message;
+    Message sentMessage = Message(
+      userId: 0,
+      message: message,
+      roomIdx: roomIdx,
+    );
+    _messageViewModel.addMessage(sentMessage);
+    _messageViewModel.editSentTimeList(roomIdx);
     notifyListeners();
   }
 }

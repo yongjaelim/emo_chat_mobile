@@ -1,4 +1,4 @@
-import 'package:emo_chat_mobile/models/emoji_repository.dart';
+import 'package:emo_chat_mobile/models/repositories/emoji_repository.dart';
 import 'package:flutter/material.dart';
 import '../models/emoji.dart';
 
@@ -36,7 +36,6 @@ class EmojiViewModel extends ChangeNotifier {
   List<String> get unicodesSymbol => _unicodesSymbol;
 
   EmojiViewModel() {
-    //getEmojis();
     getUnicodes();
   }
 

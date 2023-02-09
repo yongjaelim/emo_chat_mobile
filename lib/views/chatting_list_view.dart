@@ -118,7 +118,7 @@ class _ChattingListViewState extends State<ChattingListView> {
                             Consumer<MessageViewModel>(
                               builder: (context, messageViewModel, child) {
                                 return Text(
-                                  messageViewModel.messageList[index],
+                                  messageViewModel.messagePreviewList[index],
                                   style: const TextStyle(
                                       fontSize: 15, fontWeight: FontWeight.w100),
                                 );

@@ -27,7 +27,7 @@ class LoginView extends StatelessWidget {
                   padding: const EdgeInsets.all(40),
                   child: Image.asset('assets/images/emo_chat.png'),
                 ),
-                loginForm()
+                _loginForm()
               ],
             )
           )
@@ -35,7 +35,7 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  Widget loginForm() {
+  Widget _loginForm() {
     return Form(
       key: _key,
       child: Center(
@@ -82,7 +82,7 @@ class LoginView extends StatelessWidget {
                       loginViewModel.setPassword(text);
                     },
                     onFieldSubmitted: loginViewModel.getButtonEnabled ? (value) {
-                      submit(context);
+                      _submit(context);
                       loginViewModel.makeFieldsEmpty();
                     } : null,
                   );
@@ -100,7 +100,7 @@ class LoginView extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: loginViewModel.getButtonEnabled ? () {
-                        submit(context);
+                        _submit(context);
                         loginViewModel.makeFieldsEmpty();
                       } : null,
                       style: ElevatedButton.styleFrom(
@@ -118,7 +118,7 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  void submit(BuildContext context) {
+  void _submit(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(
         builder: (context) => const ChattingListView()
     ));
