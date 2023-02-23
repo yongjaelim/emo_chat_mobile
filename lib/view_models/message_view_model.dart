@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../models/message.dart';
 
 class MessageViewModel with ChangeNotifier {
-  late MessageRepository _messageViewModel;
+  late MessageRepository _messageRepository;
   String? _message;
   bool _buttonEnabled = false;
 
   MessageViewModel() {
-    _messageViewModel = MessageRepository();
+    _messageRepository = MessageRepository();
   }
 
   void setMessage(String value) {
@@ -22,9 +22,9 @@ class MessageViewModel with ChangeNotifier {
 
   String? get message => _message;
   bool get getButtonEnabled => _buttonEnabled;
-  List<Message> get messageList => _messageViewModel.messageList;
-  List<String> get messageSentTimeList => _messageViewModel.messageSentTimeList;
-  List<String> get messagePreviewList => _messageViewModel.messagePreviewList;
+  List<Message> get messageList => _messageRepository.messageList;
+  List<String> get messageSentTimeList => _messageRepository.messageSentTimeList;
+  List<String> get messagePreviewList => _messageRepository.messagePreviewList;
 
   void sendMessage(int roomIdx, String message, ScrollController scrollController) {
     Message sentMessage = Message(
@@ -32,8 +32,8 @@ class MessageViewModel with ChangeNotifier {
       message: message,
       roomIdx: roomIdx,
     );
-    _messageViewModel.addMessage(sentMessage);
-    _messageViewModel.editSentTimeList(roomIdx);
+    _messageRepository.addMessage(sentMessage);
+    _messageRepository.editSentTimeList(roomIdx);
     scrollController.jumpTo(scrollController.position.maxScrollExtent);
     scrollController.animateTo(
       scrollController.position.maxScrollExtent,

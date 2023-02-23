@@ -12,7 +12,6 @@ class ChatView extends StatelessWidget {
   final int index;
 
   final TextEditingController _textController = TextEditingController();
-
   final ScrollController _scrollController = ScrollController();
 
   @override
